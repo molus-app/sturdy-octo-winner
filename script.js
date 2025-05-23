@@ -117,8 +117,37 @@ async function typeWriter(element, text, speed = 33) {
         easing: 'easeOutCubic'
     });
     
+    // If there's a cursor, position it at the beginning and make it visible
+    if (cursor) {
+        cursor.style.opacity = '1';
+        cursor.style.position = 'absolute';
+    }
+    
     for (let i = 0; i < text.length; i++) {
         textElement.textContent += text[i];
+        
+        // Move cursor to the right position after each character
+        if (cursor) {
+            // Get the caret width
+            const caretWidth = caret.offsetWidth;
+            
+            // Create a temporary span to measure text width
+            const tempSpan = document.createElement('span');
+            tempSpan.style.visibility = 'hidden';
+            tempSpan.style.position = 'absolute';
+            tempSpan.style.whiteSpace = 'pre';
+            tempSpan.style.font = getComputedStyle(textElement).font;
+            tempSpan.textContent = textElement.textContent;
+            document.body.appendChild(tempSpan);
+            
+            const textWidth = tempSpan.offsetWidth;
+            document.body.removeChild(tempSpan);
+            
+            // Position cursor after the caret and current text
+            cursor.style.left = (caretWidth + textWidth) + 'px';
+            cursor.style.top = '0px';
+        }
+        
         await sleep(speed + Math.random() * 20);
     }
     
