@@ -273,83 +273,8 @@ document.addEventListener('DOMContentLoaded', () => {
         duration: 1000,
         easing: 'easeOutCubic',
         complete: () => {
-            // Add holographic class for subtle CSS glow animation
-            document.querySelector('.logo').classList.add('holographic');
-            
-            // Subtle shake animation like hand-drawn sketches
-            const logoShakeAnimation = anime({
-                targets: '.logo',
-                translateX: [0, 1, -1, 0.5, -0.5, 0],
-                translateY: [0, 0.5, -0.5, 1, -1, 0],
-                rotate: [0, 0.5, -0.5, 0.3, -0.3, 0],
-                duration: 3000,
-                easing: 'easeInOutSine',
-                loop: true
-            });
-            
-            // Add 3D flip interactions
-            const logo = document.querySelector('.logo');
-            let isFlipping = false;
-            
-            // Helper function to perform 3D flip
-            function performFlip() {
-                if (isFlipping) return;
-                isFlipping = true;
-                
-                // Pause the shake animation during flip
-                logoShakeAnimation.pause();
-                
-                anime({
-                    targets: '.logo',
-                    rotateY: [0, 180, 360],
-                    scale: [1, 1.1, 1],
-                    duration: 800,
-                    easing: 'easeInOutCubic',
-                    complete: () => {
-                        isFlipping = false;
-                        // Resume shake animation
-                        logoShakeAnimation.play();
-                    }
-                });
-            }
-            
-            // Mouse hover (desktop)
-            logo.addEventListener('mouseenter', () => {
-                if (!isFlipping) {
-                    anime({
-                        targets: '.logo',
-                        rotateY: '15deg',
-                        scale: 1.05,
-                        duration: 300,
-                        easing: 'easeOutCubic'
-                    });
-                }
-            });
-            
-            logo.addEventListener('mouseleave', () => {
-                if (!isFlipping) {
-                    anime({
-                        targets: '.logo',
-                        rotateY: '0deg',
-                        scale: 1,
-                        duration: 300,
-                        easing: 'easeOutCubic'
-                    });
-                }
-            });
-            
-            // Click interaction (desktop)
-            logo.addEventListener('click', performFlip);
-            
-            // Touch interactions (mobile)
-            logo.addEventListener('touchstart', (e) => {
-                e.preventDefault(); // Prevent mouse events on mobile
-                performFlip();
-            });
-            
-            // Add cursor pointer for better UX
-            logo.style.cursor = 'pointer';
-            logo.style.transformStyle = 'preserve-3d';
+            // Initialize simple logo functionality
+            initializeColorCyclingLogo();
         }
     });
     
@@ -380,4 +305,96 @@ document.addEventListener('DOMContentLoaded', () => {
             createFloatingSketch();
         }
     }, 2000);
-}); 
+});
+
+// Simple logo color cycling functionality
+function initializeColorCyclingLogo() {
+    const logo = document.getElementById('molusLogo');
+    const allColors = [
+        'cyan', 'purple', 'orange', 'green', 
+        'red', 'yellow', 'white', 'black'
+    ];
+    let currentColorIndex = 0;
+    let isAnimating = false;
+    
+    // Function to get appropriate colors for current mode
+    function getAvailableColors() {
+        const isDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches;
+        if (isDarkMode) {
+            // Exclude black in dark mode (hard to see)
+            return allColors.filter(color => color !== 'black');
+        } else {
+            // Exclude white in light mode (hard to see)
+            return allColors.filter(color => color !== 'white');
+        }
+    }
+    
+    // Add click/touch event to the logo
+    logo.addEventListener('click', () => cycleColor());
+    logo.addEventListener('touchstart', (e) => {
+        e.preventDefault();
+        cycleColor();
+    });
+    
+    function cycleColor() {
+        if (isAnimating) return;
+        isAnimating = true;
+        
+        // Get colors appropriate for current mode
+        const availableColors = getAvailableColors();
+        
+        // Add bouncing animation
+        logo.classList.add('bouncing');
+        
+        // Cycle to next color
+        currentColorIndex = (currentColorIndex + 1) % availableColors.length;
+        const newColor = availableColors[currentColorIndex];
+        
+        // Change the logo source with a smooth transition
+        setTimeout(() => {
+            logo.style.opacity = '0.7';
+            logo.src = `logo-${newColor}.svg`;
+            
+            // Fade back in
+            setTimeout(() => {
+                logo.style.opacity = '1';
+            }, 100);
+        }, 200);
+        
+        // Remove bouncing class and reset animation flag
+        setTimeout(() => {
+            logo.classList.remove('bouncing');
+            isAnimating = false;
+        }, 600);
+    }
+    
+    // Reset color index when color scheme changes
+    window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', () => {
+        currentColorIndex = 0; // Reset to start of new filtered array
+    });
+    
+    // Add subtle hover effect with anime.js
+    logo.addEventListener('mouseenter', () => {
+        if (!isAnimating) {
+            anime({
+                targets: logo,
+                scale: 1.05,
+                rotate: '2deg',
+                duration: 200,
+                easing: 'easeOutCubic'
+            });
+        }
+    });
+    
+    logo.addEventListener('mouseleave', () => {
+        if (!isAnimating) {
+            anime({
+                targets: logo,
+                scale: 1,
+                rotate: '0deg',
+                duration: 200,
+                easing: 'easeOutCubic'
+            });
+        }
+    });
+} 

@@ -144,52 +144,65 @@
 }
 
 .logo-container {
-    z-index: 10;
     text-align: center;
-    opacity: 0;
-    justify-content: center;
-    align-items: center;
-    width: 100%;
     margin-bottom: clamp(30px, 8vw, 40px);
-    display: flex;
-    position: relative;
+    opacity: 0;
     transform: translateY(-20px);
 }
 
 .logo {
-    filter: drop-shadow(2px 2px 4px rgba(26, 26, 26, 0.2));
-    width: clamp(60px, 15vw, 100px);
+    width: clamp(80px, 15vw, 120px);
     height: auto;
-    margin: 0 auto;
-    transition: all 0.3s;
-    display: block;
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.4, 0.0, 0.2, 1);
+    border-radius: 8px;
 }
 
-.logo svg {
-    transition: fill 0.3s;
+.logo:hover {
+    transform: translateY(-3px) scale(1.05);
 }
 
-/* Logo visibility controls */
-.logo-light {
-    display: block;
+.logo.bouncing {
+    animation: playfulBounce 0.6s cubic-bezier(0.68, -0.55, 0.265, 1.55);
 }
 
-.logo-dark {
-    display: none;
-    position: absolute;
-    top: 0;
-    left: 0;
+@keyframes playfulBounce {
+    0% { 
+        transform: scale(1) rotate(0deg); 
+    }
+    25% {
+        transform: scale(1.1) rotate(3deg);
+    }
+    50% { 
+        transform: scale(1.2) rotate(5deg); 
+    }
+    75% {
+        transform: scale(1.1) rotate(2deg);
+    }
+    100% { 
+        transform: scale(1) rotate(0deg); 
+    }
 }
 
-/* Dark mode logo styling */
+/* Dark mode adjustments */
 @media (prefers-color-scheme: dark) {
-    .logo-light {
-        display: none;
+    .logo {
+        /* No special dark mode styling needed without shadows */
     }
     
-    .logo-dark {
-        display: block;
-        position: static;
+    .logo:hover {
+        /* No special dark mode styling needed without shadows */
+    }
+}
+
+/* Mobile optimizations */
+@media (max-width: 480px) {
+    .logo {
+        width: 70px;
+    }
+    
+    .logo:hover {
+        transform: none;
     }
 }
 
@@ -336,9 +349,9 @@
 }
 
 @keyframes holographic {
-    0% { filter: drop-shadow(2px 2px 4px rgba(26, 26, 26, 0.2)); }
-    50% { filter: drop-shadow(3px 3px 6px rgba(26, 26, 26, 0.3)); }
-    100% { filter: drop-shadow(2px 2px 4px rgba(26, 26, 26, 0.2)); }
+    0% { filter: drop-shadow(2px 2px 4px rgba(0, 0, 0, 0.4)); }
+    50% { filter: drop-shadow(3px 3px 6px rgba(0, 0, 0, 0.5)); }
+    100% { filter: drop-shadow(2px 2px 4px rgba(0, 0, 0, 0.4)); }
 }
 
 .logo.holographic {
