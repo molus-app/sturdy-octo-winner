@@ -1,99 +1,103 @@
-// Create realistic night sky
-function createNightSky() {
+// Create sketch pad doodles
+function createSketchPad() {
     const container = document.body;
     
-    // Create field of stars with varying sizes and brightness
-    for (let i = 0; i < 300; i++) {
-        const star = document.createElement('div');
-        star.className = 'star';
+    // Array of simple doodles using text/symbols that look hand-drawn
+    const doodles = [
+        '○', '◇', '◯', '△', '▽', '◻', '◊', '♡', '☆', '★',
+        '→', '←', '↑', '↓', '↗', '↘', '↙', '↖', '⟲', '⟳',
+        '~', '≈', '∼', '〜', '⌢', '⌣', '⩙', '⩚', '∿', '≋',
+        '✓', '✗', '!', '?', '&', '@', '#', '%', '$', '+',
+        '※', '✧', '✦', '✶', '✸', '❀', '❁', '❃', '❅', '❆'
+    ];
+    
+    // Create field of doodles with varying sizes and opacity
+    for (let i = 0; i < 250; i++) {
+        const doodle = document.createElement('div');
+        doodle.className = 'doodle';
+        doodle.textContent = doodles[Math.floor(Math.random() * doodles.length)];
+        
         const rand = Math.random();
         
-        if (rand < 0.4) star.classList.add('tiny');
-        else if (rand < 0.7) star.classList.add('small');
-        else if (rand < 0.9) star.classList.add('medium');
-        else if (rand < 0.98) star.classList.add('large');
-        else star.classList.add('bright');
+        if (rand < 0.4) doodle.classList.add('tiny');
+        else if (rand < 0.7) doodle.classList.add('small');
+        else if (rand < 0.9) doodle.classList.add('medium');
+        else if (rand < 0.98) doodle.classList.add('large');
+        else doodle.classList.add('bright');
         
-        star.style.left = Math.random() * 100 + '%';
-        star.style.top = Math.random() * 100 + '%';
-        container.appendChild(star);
+        doodle.style.left = Math.random() * 100 + '%';
+        doodle.style.top = Math.random() * 100 + '%';
+        container.appendChild(doodle);
         
-        // Some stars twinkle
-        if (Math.random() > 0.7) {
-            star.style.animation = `twinkle ${anime.random(2, 5)}s ease-in-out infinite`;
-            star.style.animationDelay = `${Math.random() * 5}s`;
+        // Some doodles gently float
+        if (Math.random() > 0.6) {
+            doodle.style.animation = `float ${anime.random(4, 8)}s ease-in-out infinite`;
+            doodle.style.animationDelay = `${Math.random() * 5}s`;
+        }
+        
+        // Some doodles wiggle slightly
+        if (Math.random() > 0.8) {
+            doodle.style.animation = `sketch-wiggle ${anime.random(3, 6)}s ease-in-out infinite`;
+            doodle.style.animationDelay = `${Math.random() * 3}s`;
         }
     }
-    
-    // Subtle aurora animation
-    anime({
-        targets: '.aurora',
-        opacity: [0, 0.3, 0],
-        translateY: [-20, 20],
-        duration: 20000,
-        easing: 'easeInOutSine',
-        loop: true
-    });
-    
-    // Milky way subtle movement
-    anime({
-        targets: '.milky-way',
-        rotate: [-30, -25, -30],
-        duration: 60000,
-        easing: 'easeInOutSine',
-        loop: true
-    });
 }
 
-function createShootingStar() {
-    const shootingStar = document.createElement('div');
-    shootingStar.className = 'shooting-star';
+function createFloatingSketch() {
+    const sketch = document.createElement('div');
+    sketch.className = 'sketch-element';
     
-    // Random starting position in upper portion of sky
+    // Random sketchy elements
+    const sketchElements = ['⟶', '⤴', '⤵', '↝', '↜', '⇝', '⇜', '⟿', '⤷', '⤶'];
+    sketch.textContent = sketchElements[Math.floor(Math.random() * sketchElements.length)];
+    
+    // Random starting position
     const startX = Math.random() * window.innerWidth;
-    const startY = Math.random() * window.innerHeight * 0.5;
-    shootingStar.style.left = startX + 'px';
-    shootingStar.style.top = startY + 'px';
+    const startY = Math.random() * window.innerHeight * 0.7;
+    sketch.style.left = startX + 'px';
+    sketch.style.top = startY + 'px';
     
-    // Random angle between 15 and 45 degrees
-    const angle = anime.random(15, 45);
-    shootingStar.style.transform = `rotate(${angle}deg)`;
+    // Random angle for movement
+    const angle = anime.random(-30, 30);
+    sketch.style.transform = `rotate(${angle}deg)`;
     
-    document.body.appendChild(shootingStar);
+    document.body.appendChild(sketch);
     
-    const distance = anime.random(200, 400);
-    const endX = distance * Math.cos(angle * Math.PI / 180);
-    const endY = distance * Math.sin(angle * Math.PI / 180);
+    const distance = anime.random(150, 300);
+    const endX = distance * Math.cos(angle * Math.PI / 180) * 0.5;
+    const endY = distance * Math.sin(angle * Math.PI / 180) * 0.5;
     
     anime({
-        targets: shootingStar,
+        targets: sketch,
         translateX: endX,
         translateY: endY,
-        opacity: [0, 1, 0],
-        duration: anime.random(800, 1500),
+        opacity: [0, 0.4, 0],
+        rotate: angle + anime.random(-10, 10),
+        duration: anime.random(2000, 4000),
         easing: 'easeOutCubic',
-        complete: () => shootingStar.remove()
+        complete: () => sketch.remove()
     });
 }
 
-// Mouse interaction - create star glow
+// Mouse interaction - create sketch marks
 document.addEventListener('mousemove', (e) => {
-    if (Math.random() > 0.95) {
-        const glow = document.createElement('div');
-        glow.className = 'star small';
-        glow.style.left = e.clientX + 'px';
-        glow.style.top = e.clientY + 'px';
-        glow.style.position = 'fixed';
-        glow.style.boxShadow = '0 0 10px rgba(255, 255, 255, 0.8)';
-        document.body.appendChild(glow);
+    if (Math.random() > 0.97) {
+        const mark = document.createElement('div');
+        mark.className = 'doodle tiny';
+        mark.textContent = Math.random() > 0.5 ? '·' : '°';
+        mark.style.left = e.clientX + 'px';
+        mark.style.top = e.clientY + 'px';
+        mark.style.position = 'fixed';
+        mark.style.opacity = '0.3';
+        document.body.appendChild(mark);
         
         anime({
-            targets: glow,
-            scale: [0, 1.5, 0],
-            opacity: [1, 0],
-            duration: 1000,
+            targets: mark,
+            scale: [0, 1.2, 0.8],
+            opacity: [0.3, 0],
+            duration: 1500,
             easing: 'easeOutCubic',
-            complete: () => glow.remove()
+            complete: () => mark.remove()
         });
     }
 });
@@ -190,57 +194,62 @@ function handleSubmit(event) {
     button.textContent = 'subscribing...';
     button.disabled = true;
     
-    // Create constellation burst animation
+    // Create simple success animation
     const centerX = button.offsetLeft + button.offsetWidth / 2;
     const centerY = button.offsetTop + button.offsetHeight / 2;
     
-    for (let i = 0; i < 8; i++) {
-        const star = document.createElement('div');
-        star.className = 'star bright';
-        star.style.position = 'absolute';
-        star.style.left = centerX + 'px';
-        star.style.top = centerY + 'px';
-        star.style.zIndex = '100';
-        button.parentElement.appendChild(star);
+    // Create a checkmark that appears
+    const checkmark = document.createElement('div');
+    checkmark.className = 'doodle bright';
+    checkmark.textContent = '✓';
+    checkmark.style.position = 'absolute';
+    checkmark.style.left = (centerX + 30) + 'px';
+    checkmark.style.top = (centerY - 10) + 'px';
+    checkmark.style.zIndex = '100';
+    checkmark.style.fontSize = '20px';
+    checkmark.style.opacity = '0';
+    button.parentElement.appendChild(checkmark);
+    
+    // Animate checkmark
+    anime({
+        targets: checkmark,
+        opacity: [0, 1, 1, 0],
+        scale: [0.5, 1.2, 1.2, 0.8],
+        rotate: [0, 5, -5, 0],
+        duration: 2000,
+        easing: 'easeOutCubic',
+        complete: () => checkmark.remove()
+    });
+    
+    // Create a few simple scattered doodles
+    const simpleDoodles = ['○', '~', '♡'];
+    
+    for (let i = 0; i < 3; i++) {
+        const doodle = document.createElement('div');
+        doodle.className = 'doodle small';
+        doodle.textContent = simpleDoodles[i];
+        doodle.style.position = 'absolute';
         
-        const angle = (i / 8) * Math.PI * 2;
-        const distance = anime.random(60, 120);
+        // Random position around the button
+        const offsetX = anime.random(-40, 40);
+        const offsetY = anime.random(-30, 30);
+        doodle.style.left = (centerX + offsetX) + 'px';
+        doodle.style.top = (centerY + offsetY) + 'px';
+        doodle.style.zIndex = '99';
+        doodle.style.opacity = '0';
+        button.parentElement.appendChild(doodle);
         
+        // Animate each doodle gently
         anime({
-            targets: star,
-            translateX: Math.cos(angle) * distance,
-            translateY: Math.sin(angle) * distance,
-            scale: [0, 2, 0],
-            opacity: [1, 0],
+            targets: doodle,
+            opacity: [0, 0.6, 0],
+            scale: [0, 1, 0.8],
+            rotate: anime.random(-15, 15),
             duration: 1500,
             easing: 'easeOutCubic',
-            delay: i * 50,
-            complete: () => star.remove()
+            delay: i * 200,
+            complete: () => doodle.remove()
         });
-        
-        // Create connecting lines between stars
-        if (i > 0) {
-            const line = document.createElement('div');
-            line.className = 'constellation-line';
-            line.style.position = 'absolute';
-            line.style.left = centerX + 'px';
-            line.style.top = centerY + 'px';
-            line.style.transformOrigin = 'left center';
-            line.style.width = distance + 'px';
-            line.style.transform = `rotate(${angle * 180 / Math.PI}deg)`;
-            line.style.zIndex = '99';
-            button.parentElement.appendChild(line);
-            
-            anime({
-                targets: line,
-                opacity: [0, 0.5, 0],
-                scaleX: [0, 1, 1],
-                duration: 1200,
-                easing: 'easeOutCubic',
-                delay: i * 50,
-                complete: () => line.remove()
-            });
-        }
     }
     
     // Reset button after animation but let form submit
@@ -254,7 +263,7 @@ function handleSubmit(event) {
 
 // Initialize
 document.addEventListener('DOMContentLoaded', () => {
-    createNightSky();
+    createSketchPad();
     
     // Animate logo entrance
     anime({
@@ -267,14 +276,80 @@ document.addEventListener('DOMContentLoaded', () => {
             // Add holographic class for subtle CSS glow animation
             document.querySelector('.logo').classList.add('holographic');
             
-            // Simple, subtle floating animation
-            anime({
+            // Subtle shake animation like hand-drawn sketches
+            const logoShakeAnimation = anime({
                 targets: '.logo',
-                translateY: [-3, 3, -3],
-                duration: 4000,
+                translateX: [0, 1, -1, 0.5, -0.5, 0],
+                translateY: [0, 0.5, -0.5, 1, -1, 0],
+                rotate: [0, 0.5, -0.5, 0.3, -0.3, 0],
+                duration: 3000,
                 easing: 'easeInOutSine',
                 loop: true
             });
+            
+            // Add 3D flip interactions
+            const logo = document.querySelector('.logo');
+            let isFlipping = false;
+            
+            // Helper function to perform 3D flip
+            function performFlip() {
+                if (isFlipping) return;
+                isFlipping = true;
+                
+                // Pause the shake animation during flip
+                logoShakeAnimation.pause();
+                
+                anime({
+                    targets: '.logo',
+                    rotateY: [0, 180, 360],
+                    scale: [1, 1.1, 1],
+                    duration: 800,
+                    easing: 'easeInOutCubic',
+                    complete: () => {
+                        isFlipping = false;
+                        // Resume shake animation
+                        logoShakeAnimation.play();
+                    }
+                });
+            }
+            
+            // Mouse hover (desktop)
+            logo.addEventListener('mouseenter', () => {
+                if (!isFlipping) {
+                    anime({
+                        targets: '.logo',
+                        rotateY: '15deg',
+                        scale: 1.05,
+                        duration: 300,
+                        easing: 'easeOutCubic'
+                    });
+                }
+            });
+            
+            logo.addEventListener('mouseleave', () => {
+                if (!isFlipping) {
+                    anime({
+                        targets: '.logo',
+                        rotateY: '0deg',
+                        scale: 1,
+                        duration: 300,
+                        easing: 'easeOutCubic'
+                    });
+                }
+            });
+            
+            // Click interaction (desktop)
+            logo.addEventListener('click', performFlip);
+            
+            // Touch interactions (mobile)
+            logo.addEventListener('touchstart', (e) => {
+                e.preventDefault(); // Prevent mouse events on mobile
+                performFlip();
+            });
+            
+            // Add cursor pointer for better UX
+            logo.style.cursor = 'pointer';
+            logo.style.transformStyle = 'preserve-3d';
         }
     });
     
@@ -302,7 +377,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // Periodic shooting stars
     setInterval(() => {
         if (Math.random() > 0.5) {
-            createShootingStar();
+            createFloatingSketch();
         }
     }, 2000);
 }); 
