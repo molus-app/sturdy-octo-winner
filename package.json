@@ -1,0 +1,26 @@
+{
+  "name": "molus-landing-page",
+  "version": "1.0.0",
+  "description": "A space-themed landing page for the molus builders collective featuring terminal-style animations and cosmic visuals.",
+  "main": "script.js",
+  "scripts": {
+    "build-css": "tailwindcss -i ./src/input.css -o ./styles.css --watch",
+    "build-css-prod": "tailwindcss -i ./src/input.css -o ./styles.css --minify",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/molus-app/sturdy-octo-winner.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/molus-app/sturdy-octo-winner/issues"
+  },
+  "homepage": "https://github.com/molus-app/sturdy-octo-winner#readme",
+  "devDependencies": {
+    "@tailwindcss/cli": "^4.1.7",
+    "tailwindcss": "^4.1.7"
+  }
+}

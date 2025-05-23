@@ -25,16 +25,6 @@ function createNightSky() {
         }
     }
     
-    // Create constellations
-    createConstellations();
-    
-    // Periodic shooting stars
-    setInterval(() => {
-        if (Math.random() > 0.5) {
-            createShootingStar();
-        }
-    }, 2000);
-    
     // Subtle aurora animation
     anime({
         targets: '.aurora',
@@ -83,82 +73,6 @@ function createShootingStar() {
         duration: anime.random(800, 1500),
         easing: 'easeOutCubic',
         complete: () => shootingStar.remove()
-    });
-}
-
-function createConstellations() {
-    const container = document.body;
-    
-    // Define constellation patterns
-    const constellationPatterns = [
-        // Big Dipper-like pattern
-        {
-            stars: [[0, 0], [30, -10], [60, -5], [90, 10], [85, 40], [60, 45], [30, 35]],
-            lines: [[0, 1], [1, 2], [2, 3], [3, 4], [4, 5], [5, 6], [6, 0]]
-        },
-        // Orion-like pattern
-        {
-            stars: [[0, 0], [40, 0], [20, -30], [20, 30], [10, 50], [30, 50], [20, 70]],
-            lines: [[0, 2], [1, 2], [0, 3], [1, 3], [3, 4], [3, 5], [4, 6], [5, 6]]
-        },
-        // Cassiopeia-like W pattern
-        {
-            stars: [[0, 20], [20, 0], [40, 15], [60, 0], [80, 20]],
-            lines: [[0, 1], [1, 2], [2, 3], [3, 4]]
-        }
-    ];
-    
-    // Place constellations
-    constellationPatterns.forEach((pattern, index) => {
-        const constellation = document.createElement('div');
-        constellation.className = 'constellation';
-        
-        // Random position for constellation
-        const baseX = Math.random() * (window.innerWidth - 200) + 100;
-        const baseY = Math.random() * (window.innerHeight - 200) + 100;
-        constellation.style.left = baseX + 'px';
-        constellation.style.top = baseY + 'px';
-        
-        // Create stars
-        pattern.stars.forEach((pos, i) => {
-            const star = document.createElement('div');
-            star.className = 'constellation-star';
-            star.style.left = pos[0] + 'px';
-            star.style.top = pos[1] + 'px';
-            constellation.appendChild(star);
-        });
-        
-        // Create connecting lines
-        pattern.lines.forEach(([start, end]) => {
-            const line = document.createElement('div');
-            line.className = 'constellation-line';
-            
-            const x1 = pattern.stars[start][0];
-            const y1 = pattern.stars[start][1];
-            const x2 = pattern.stars[end][0];
-            const y2 = pattern.stars[end][1];
-            
-            const length = Math.sqrt(Math.pow(x2 - x1, 2) + Math.pow(y2 - y1, 2));
-            const angle = Math.atan2(y2 - y1, x2 - x1) * 180 / Math.PI;
-            
-            line.style.width = length + 'px';
-            line.style.left = x1 + 'px';
-            line.style.top = y1 + 'px';
-            line.style.transform = `rotate(${angle}deg)`;
-            
-            constellation.appendChild(line);
-        });
-        
-        container.appendChild(constellation);
-        
-        // Fade in constellation
-        anime({
-            targets: constellation.querySelectorAll('.constellation-star, .constellation-line'),
-            opacity: [0, 1],
-            duration: 2000,
-            delay: anime.stagger(100, {start: index * 1000}),
-            easing: 'easeInOutSine'
-        });
     });
 }
 
@@ -384,4 +298,11 @@ document.addEventListener('DOMContentLoaded', () => {
             easing: 'easeOutCubic'
         });
     });
+    
+    // Periodic shooting stars
+    setInterval(() => {
+        if (Math.random() > 0.5) {
+            createShootingStar();
+        }
+    }, 2000);
 }); 
