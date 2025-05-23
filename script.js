@@ -1,4 +1,4 @@
-// Create sketch pad doodles
+// ===== SKETCH PAD DOODLES =====
 function createSketchPad() {
     const container = document.body;
     
@@ -43,6 +43,7 @@ function createSketchPad() {
     }
 }
 
+// ===== FLOATING SKETCHES =====
 function createFloatingSketch() {
     const sketch = document.createElement('div');
     sketch.className = 'sketch-element';
@@ -79,7 +80,7 @@ function createFloatingSketch() {
     });
 }
 
-// Mouse interaction - create sketch marks
+// ===== MOUSE INTERACTIONS =====
 document.addEventListener('mousemove', (e) => {
     if (Math.random() > 0.97) {
         const mark = document.createElement('div');
@@ -102,7 +103,7 @@ document.addEventListener('mousemove', (e) => {
     }
 });
 
-// Typewriter animation
+// ===== TYPEWRITER ANIMATION =====
 async function typeWriter(element, text, speed = 33) {
     const textElement = element.querySelector('.text');
     const cursor = element.querySelector('.cursor');
@@ -177,7 +178,7 @@ async function animateTerminal() {
     });
 }
 
-// Handle form submission
+// ===== FORM HANDLING =====
 function handleSubmit(event) {
     const email = event.target.querySelector('.email-input').value;
     const button = event.target.querySelector('.submit-button');
@@ -261,7 +262,7 @@ function handleSubmit(event) {
     return true;
 }
 
-// Initialize
+// ===== INITIALIZATION =====
 document.addEventListener('DOMContentLoaded', () => {
     createSketchPad();
     
@@ -307,41 +308,30 @@ document.addEventListener('DOMContentLoaded', () => {
     }, 2000);
 });
 
-// Enhanced logo color cycling functionality with auto-cycling
+// ===== LOGO AUTO-CYCLING =====
 function initializeColorCyclingLogo() {
     const logo = document.getElementById('molusLogo');
-    const allColors = [
-        'cyan', 'purple', 'orange', 'green', 
-        'red', 'yellow', 'white', 'black'
-    ];
+    const allColors = ['cyan', 'purple', 'orange', 'green', 'red', 'yellow', 'white', 'black'];
     let currentColorIndex = 0;
     let isAnimating = false;
     let autoInterval;
     
-    // Function to get appropriate colors for current mode
     function getAvailableColors() {
         const isDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches;
-        if (isDarkMode) {
-            // Exclude black in dark mode (hard to see)
-            return allColors.filter(color => color !== 'black');
-        } else {
-            // Exclude white in light mode (hard to see)
-            return allColors.filter(color => color !== 'white');
-        }
+        return isDarkMode 
+            ? allColors.filter(color => color !== 'black')
+            : allColors.filter(color => color !== 'white');
     }
     
     function cycleColor() {
         if (isAnimating) return;
         isAnimating = true;
         
-        // Get colors appropriate for current mode
         const availableColors = getAvailableColors();
-        
-        // Cycle to next color
         currentColorIndex = (currentColorIndex + 1) % availableColors.length;
         const newColor = availableColors[currentColorIndex];
         
-        // Smooth transition animation using anime.js
+        // Smooth transition with anime.js
         anime({
             targets: logo,
             opacity: [1, 0.3],
@@ -350,10 +340,7 @@ function initializeColorCyclingLogo() {
             duration: 300,
             easing: 'easeInOutQuad',
             complete: () => {
-                // Change the logo source
                 logo.src = `logo-${newColor}.svg`;
-                
-                // Animate back in with a slight bounce
                 anime({
                     targets: logo,
                     opacity: [0.3, 1],
@@ -361,57 +348,17 @@ function initializeColorCyclingLogo() {
                     rotate: [3, -1, 0],
                     duration: 500,
                     easing: 'easeOutElastic(1, 0.5)',
-                    complete: () => {
-                        isAnimating = false;
-                    }
+                    complete: () => { isAnimating = false; }
                 });
             }
         });
     }
     
-    // Start auto-cycling every 3 seconds
     function startAutoCycling() {
-        autoInterval = setInterval(() => {
-            cycleColor();
-        }, 3000);
+        autoInterval = setInterval(cycleColor, 3000);
     }
     
-    // Stop auto-cycling (e.g., when user interacts)
-    function stopAutoCycling() {
-        if (autoInterval) {
-            clearInterval(autoInterval);
-            autoInterval = null;
-        }
-    }
-    
-    // Restart auto-cycling after a delay
-    function restartAutoCycling() {
-        stopAutoCycling();
-        setTimeout(() => {
-            startAutoCycling();
-        }, 5000); // Wait 5 seconds after user interaction before resuming auto-cycle
-    }
-    
-    // Add click/touch event to the logo (manual override)
-    logo.addEventListener('click', () => {
-        stopAutoCycling();
-        cycleColor();
-        restartAutoCycling();
-    });
-    
-    logo.addEventListener('touchstart', (e) => {
-        e.preventDefault();
-        stopAutoCycling();
-        cycleColor();
-        restartAutoCycling();
-    });
-    
-    // Reset color index when color scheme changes
-    window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', () => {
-        currentColorIndex = 0; // Reset to start of new filtered array
-    });
-    
-    // Enhanced hover effect with anime.js
+    // Enhanced hover effect
     logo.addEventListener('mouseenter', () => {
         if (!isAnimating) {
             anime({
@@ -436,8 +383,11 @@ function initializeColorCyclingLogo() {
         }
     });
     
-    // Start the auto-cycling after a short delay
-    setTimeout(() => {
-        startAutoCycling();
-    }, 2000); // Wait 2 seconds after page load before starting auto-cycle
+    // Reset on color scheme change
+    window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', () => {
+        currentColorIndex = 0;
+    });
+    
+    // Start auto-cycling after delay
+    setTimeout(startAutoCycling, 2000);
 } 

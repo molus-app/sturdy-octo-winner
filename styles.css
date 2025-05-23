@@ -1,6 +1,7 @@
 /*! tailwindcss v4.1.7 | MIT License | https://tailwindcss.com */
 @layer properties{@supports (((-webkit-hyphens:none)) and (not (margin-trim:inline))) or ((-moz-orient:inline) and (not (color:rgb(from red r g b)))){*,:before,:after,::backdrop{--tw-rotate-x:initial;--tw-rotate-y:initial;--tw-rotate-z:initial;--tw-skew-x:initial;--tw-skew-y:initial;--tw-blur:initial;--tw-brightness:initial;--tw-contrast:initial;--tw-grayscale:initial;--tw-hue-rotate:initial;--tw-invert:initial;--tw-opacity:initial;--tw-saturate:initial;--tw-sepia:initial;--tw-drop-shadow:initial;--tw-drop-shadow-color:initial;--tw-drop-shadow-alpha:100%;--tw-drop-shadow-size:initial;--tw-ease:initial}}}@layer theme{:root,:host{--font-sans:ui-sans-serif,system-ui,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji";--font-mono:ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,"Liberation Mono","Courier New",monospace;--color-white:#fff;--ease-in-out:cubic-bezier(.4,0,.2,1);--default-font-family:var(--font-sans);--default-mono-font-family:var(--font-mono)}}@layer base{*,:after,:before,::backdrop{box-sizing:border-box;border:0 solid;margin:0;padding:0}::file-selector-button{box-sizing:border-box;border:0 solid;margin:0;padding:0}html,:host{-webkit-text-size-adjust:100%;tab-size:4;line-height:1.5;font-family:var(--default-font-family,ui-sans-serif,system-ui,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji");font-feature-settings:var(--default-font-feature-settings,normal);font-variation-settings:var(--default-font-variation-settings,normal);-webkit-tap-highlight-color:transparent}hr{height:0;color:inherit;border-top-width:1px}abbr:where([title]){-webkit-text-decoration:underline dotted;text-decoration:underline dotted}h1,h2,h3,h4,h5,h6{font-size:inherit;font-weight:inherit}a{color:inherit;-webkit-text-decoration:inherit;-webkit-text-decoration:inherit;-webkit-text-decoration:inherit;text-decoration:inherit}b,strong{font-weight:bolder}code,kbd,samp,pre{font-family:var(--default-mono-font-family,ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,"Liberation Mono","Courier New",monospace);font-feature-settings:var(--default-mono-font-feature-settings,normal);font-variation-settings:var(--default-mono-font-variation-settings,normal);font-size:1em}small{font-size:80%}sub,sup{vertical-align:baseline;font-size:75%;line-height:0;position:relative}sub{bottom:-.25em}sup{top:-.5em}table{text-indent:0;border-color:inherit;border-collapse:collapse}:-moz-focusring{outline:auto}progress{vertical-align:baseline}summary{display:list-item}ol,ul,menu{list-style:none}img,svg,video,canvas,audio,iframe,embed,object{vertical-align:middle;display:block}img,video{max-width:100%;height:auto}button,input,select,optgroup,textarea{font:inherit;font-feature-settings:inherit;font-variation-settings:inherit;letter-spacing:inherit;color:inherit;opacity:1;background-color:#0000;border-radius:0}::file-selector-button{font:inherit;font-feature-settings:inherit;font-variation-settings:inherit;letter-spacing:inherit;color:inherit;opacity:1;background-color:#0000;border-radius:0}:where(select:is([multiple],[size])) optgroup{font-weight:bolder}:where(select:is([multiple],[size])) optgroup option{padding-inline-start:20px}::file-selector-button{margin-inline-end:4px}::placeholder{opacity:1}@supports (not ((-webkit-appearance:-apple-pay-button))) or (contain-intrinsic-size:1px){::placeholder{color:currentColor}@supports (color:color-mix(in lab, red, red)){::placeholder{color:color-mix(in oklab,currentcolor 50%,transparent)}}}textarea{resize:vertical}::-webkit-search-decoration{-webkit-appearance:none}::-webkit-date-and-time-value{min-height:1lh;text-align:inherit}::-webkit-datetime-edit{display:inline-flex}::-webkit-datetime-edit-fields-wrapper{padding:0}::-webkit-datetime-edit{padding-block:0}::-webkit-datetime-edit-year-field{padding-block:0}::-webkit-datetime-edit-month-field{padding-block:0}::-webkit-datetime-edit-day-field{padding-block:0}::-webkit-datetime-edit-hour-field{padding-block:0}::-webkit-datetime-edit-minute-field{padding-block:0}::-webkit-datetime-edit-second-field{padding-block:0}::-webkit-datetime-edit-millisecond-field{padding-block:0}::-webkit-datetime-edit-meridiem-field{padding-block:0}:-moz-ui-invalid{box-shadow:none}button,input:where([type=button],[type=reset],[type=submit]){appearance:button}::file-selector-button{appearance:button}::-webkit-inner-spin-button{height:auto}::-webkit-outer-spin-button{height:auto}[hidden]:where(:not([hidden=until-found])){display:none!important}}@layer components;@layer utilities{.visible{visibility:visible}.absolute{position:absolute}.fixed{position:fixed}.static{position:static}.container{width:100%}@media (min-width:40rem){.container{max-width:40rem}}@media (min-width:48rem){.container{max-width:48rem}}@media (min-width:64rem){.container{max-width:64rem}}@media (min-width:80rem){.container{max-width:80rem}}@media (min-width:96rem){.container{max-width:96rem}}.hidden{display:none}.transform{transform:var(--tw-rotate-x,)var(--tw-rotate-y,)var(--tw-rotate-z,)var(--tw-skew-x,)var(--tw-skew-y,)}.text-white{color:var(--color-white)}.blur{--tw-blur:blur(8px);filter:var(--tw-blur,)var(--tw-brightness,)var(--tw-contrast,)var(--tw-grayscale,)var(--tw-hue-rotate,)var(--tw-invert,)var(--tw-saturate,)var(--tw-sepia,)var(--tw-drop-shadow,)}.ease-in-out{--tw-ease:var(--ease-in-out);transition-timing-function:var(--ease-in-out)}}
 
+/* ===== CUSTOM STYLES ===== */
 /* Sketch Pad Theme */
 * {
     box-sizing: border-box;
@@ -9,7 +10,7 @@
 }
 
 :root {
-    /* Sketch pad color scheme - black and white */
+    /* Light sketch pad color scheme */
     --bg-color: #fefefe;
     --bg-gradient-1: #f8f8f8;
     --bg-gradient-2: #fefefe;
@@ -17,13 +18,11 @@
     --text-color: #1a1a1a;
     --accent-color: #333;
     --input-bg: rgba(255, 255, 255, 0.8);
-    --input-bg-rgb: 255, 255, 255;
     --input-border: rgba(26, 26, 26, 0.2);
     --button-bg: #1a1a1a;
     --button-text: #fefefe;
     --cursor-color: #1a1a1a;
     --doodle-color: #1a1a1a;
-    --glow-color: rgba(26, 26, 26, 0.1);
 }
 
 @media (prefers-color-scheme: dark) {
@@ -36,25 +35,21 @@
         --text-color: #fefefe;
         --accent-color: #ccc;
         --input-bg: rgba(26, 26, 26, 0.8);
-        --input-bg-rgb: 26, 26, 26;
         --input-border: rgba(254, 254, 254, 0.2);
         --button-bg: #fefefe;
         --button-text: #1a1a1a;
         --cursor-color: #fefefe;
         --doodle-color: #fefefe;
-        --glow-color: rgba(254, 254, 254, 0.1);
     }
     
     .body-styles {
         background-image: 
-            /* Dark paper texture pattern */
             radial-gradient(circle at 25% 25%, rgba(254, 254, 254, 0.02) 1px, transparent 1px),
             radial-gradient(circle at 75% 75%, rgba(254, 254, 254, 0.01) 1px, transparent 1px);
     }
     
     .background-overlay {
         background: 
-            /* Very subtle dark paper grain */
             linear-gradient(90deg, transparent 98%, rgba(254, 254, 254, 0.01) 100%),
             linear-gradient(0deg, transparent 98%, rgba(254, 254, 254, 0.01) 100%);
     }
@@ -78,21 +73,13 @@
     .submit-button:hover {
         box-shadow: 2px 4px 8px rgba(254, 254, 254, 0.2);
     }
-    
-    .constellation-line {
-        background-color: rgba(254, 254, 254, 0.2);
-    }
-    
-    .constellation-star {
-        background-color: var(--doodle-color);
-    }
 }
 
+/* ===== LAYOUT ===== */
 .body-styles {
     color: var(--text-color);
     background: var(--bg-color);
     background-image: 
-        /* Paper texture pattern */
         radial-gradient(circle at 25% 25%, rgba(26, 26, 26, 0.02) 1px, transparent 1px),
         radial-gradient(circle at 75% 75%, rgba(26, 26, 26, 0.01) 1px, transparent 1px);
     background-size: 24px 24px, 32px 32px;
@@ -110,7 +97,6 @@
 .background-overlay {
     z-index: 0;
     background: 
-        /* Very subtle paper grain */
         linear-gradient(90deg, transparent 98%, rgba(26, 26, 26, 0.01) 100%),
         linear-gradient(0deg, transparent 98%, rgba(26, 26, 26, 0.01) 100%);
     background-size: 8px 8px, 12px 12px;
@@ -139,15 +125,14 @@
     box-shadow: 
         4px 4px 0px rgba(26, 26, 26, 0.1),
         inset 0 0 30px rgba(255, 255, 255, 0.5);
-    /* Slightly tilted like a sketch pad page */
     transform: rotate(-0.5deg);
 }
 
+/* ===== LOGO ===== */
 .logo-container {
     display: flex;
     align-items: center;
     justify-content: flex-start;
-    gap: 12px;
     margin-bottom: clamp(30px, 8vw, 40px);
     opacity: 0;
     transform: translateY(-20px);
@@ -161,125 +146,11 @@
     border-radius: 8px;
 }
 
-.tap-me-hint {
-    display: flex;
-    align-items: center;
-    gap: 4px;
-    opacity: 0.6;
-    font-family: 'Courier New', Courier, monospace;
-    font-size: clamp(11px, 2.5vw, 13px);
-    color: var(--text-color);
-    transition: all 0.3s ease;
-    animation: subtlePulse 3s ease-in-out infinite;
-}
-
-.tap-me-hint .arrow {
-    font-size: clamp(12px, 3vw, 14px);
-    display: inline-block;
-    transition: transform 0.3s ease;
-}
-
-.tap-me-hint .text {
-    font-weight: 400;
-    letter-spacing: 0.5px;
-}
-
-.logo-container:hover .tap-me-hint {
-    opacity: 0.8;
-    transform: translateX(2px);
-}
-
-.logo-container:hover .tap-me-hint .arrow {
-    transform: translateX(-2px);
-}
-
-@keyframes subtlePulse {
-    0%, 100% { 
-        opacity: 0.6;
-    }
-    50% { 
-        opacity: 0.4;
-    }
-}
-
 .logo:hover {
     transform: translateY(-3px) scale(1.05);
 }
 
-.logo.bouncing {
-    animation: playfulBounce 0.6s cubic-bezier(0.68, -0.55, 0.265, 1.55);
-}
-
-@keyframes playfulBounce {
-    0% { 
-        transform: scale(1) rotate(0deg); 
-    }
-    25% {
-        transform: scale(1.1) rotate(3deg);
-    }
-    50% { 
-        transform: scale(1.2) rotate(5deg); 
-    }
-    75% {
-        transform: scale(1.1) rotate(2deg);
-    }
-    100% { 
-        transform: scale(1) rotate(0deg); 
-    }
-}
-
-/* Dark mode adjustments */
-@media (prefers-color-scheme: dark) {
-    .logo {
-        /* No special dark mode styling needed without shadows */
-    }
-    
-    .logo:hover {
-        /* No special dark mode styling needed without shadows */
-    }
-}
-
-/* Mobile optimizations */
-@media (max-width: 480px) {
-    .body-styles {
-        padding: 20px 16px;
-    }
-    .logo {
-        width: 60px;
-    }
-    .tap-me-hint {
-        font-size: 10px;
-        gap: 3px;
-    }
-    .tap-me-hint .arrow {
-        font-size: 11px;
-    }
-    .container {
-        border-radius: 8px;
-        padding: 24px 16px;
-    }
-    .terminal-line {
-        margin-bottom: 10px;
-        font-size: 14px;
-    }
-    .form-group {
-        flex-direction: column;
-        gap: 12px;
-    }
-    .email-input {
-        width: 100%;
-        min-width: unset;
-    }
-    .submit-button {
-        justify-self: stretch;
-        width: 100%;
-    }
-    .form-title {
-        margin-bottom: 16px;
-        font-size: 12px;
-    }
-}
-
+/* ===== TERMINAL ===== */
 .terminal-content {
     margin-bottom: clamp(40px, 12vw, 60px);
 }
@@ -312,6 +183,7 @@
     display: inline-block;
 }
 
+/* ===== FORM ===== */
 .signup-form {
     opacity: 0;
     margin-top: clamp(40px, 15vw, 80px);
@@ -372,11 +244,12 @@
     white-space: nowrap;
     border: 2px solid var(--button-bg);
     border-radius: 4px;
-    padding: clamp(10px, 3vw, 12px) clamp(18px, 6vw, 24px);
+    padding: clamp(10px, 3vw, 12px) clamp(16px, 5vw, 20px);
     font-family: inherit;
     font-size: clamp(12px, 3.5vw, 14px);
-    transition: all 0.3s;
+    font-weight: 500;
     position: relative;
+    transition: all 0.3s;
     overflow: hidden;
 }
 
@@ -386,14 +259,15 @@
 }
 
 .submit-button:before {
-    content: "";
-    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
-    width: 100%;
-    height: 100%;
-    transition: left 0.5s;
+    content: '';
+    background: linear-gradient(45deg, transparent 30%, rgba(255, 255, 255, 0.1) 50%, transparent 70%);
+    width: 200%;
+    height: 200%;
+    top: -50%;
+    left: -150%;
     position: absolute;
-    top: 0;
-    left: -100%;
+    transform: rotate(30deg);
+    transition: left 0.6s;
 }
 
 .submit-button:hover:before {
@@ -401,213 +275,188 @@
 }
 
 .submit-button:active:before {
-    transition: left;
     left: 100%;
+    transition: left 0s;
 }
 
+/* ===== ANIMATIONS ===== */
 @keyframes blink {
     0%, 50% { opacity: 1; }
     51%, 100% { opacity: 0; }
 }
 
 @keyframes float {
-    0%, 100% { transform: translateY(0px) rotate(0deg); }
-    50% { transform: translateY(-10px) rotate(2deg); }
+    0%, 100% { transform: translateY(0px); }
+    50% { transform: translateY(-10px); }
 }
 
 @keyframes sketch-wiggle {
-    0%, 100% { transform: translateX(0px) translateY(0px) rotate(0deg); }
-    25% { transform: translateX(1px) translateY(-1px) rotate(1deg); }
-    50% { transform: translateX(-1px) translateY(1px) rotate(-1deg); }
-    75% { transform: translateX(1px) translateY(1px) rotate(0.5deg); }
+    0%, 100% { transform: rotate(0deg) translateX(0px); }
+    25% { transform: rotate(0.5deg) translateX(1px); }
+    75% { transform: rotate(-0.5deg) translateX(-1px); }
 }
 
-@keyframes holographic {
-    0% { filter: drop-shadow(2px 2px 4px rgba(0, 0, 0, 0.4)); }
-    50% { filter: drop-shadow(3px 3px 6px rgba(0, 0, 0, 0.5)); }
-    100% { filter: drop-shadow(2px 2px 4px rgba(0, 0, 0, 0.4)); }
-}
-
-.logo.holographic {
-    animation: holographic 4s ease-in-out infinite;
-}
-
-/* Sketch Pad Doodles - replacing stars */
+/* ===== DOODLES ===== */
 .doodle {
-    pointer-events: none;
-    z-index: 1;
     position: absolute;
     color: var(--doodle-color);
+    opacity: 0.15;
+    pointer-events: none;
     font-size: 16px;
-    opacity: 0.3;
-    animation: float 6s ease-in-out infinite;
+    user-select: none;
+    z-index: 1;
 }
 
 .doodle.tiny {
-    opacity: 0.2;
-    font-size: 12px;
+    font-size: 10px;
+    opacity: 0.08;
 }
 
 .doodle.small {
-    opacity: 0.25;
     font-size: 14px;
+    opacity: 0.12;
 }
 
 .doodle.medium {
-    opacity: 0.3;
     font-size: 18px;
+    opacity: 0.18;
 }
 
 .doodle.large {
-    opacity: 0.4;
     font-size: 22px;
+    opacity: 0.25;
 }
 
 .doodle.bright {
-    opacity: 0.5;
-    font-size: 24px;
-    animation: sketch-wiggle 4s ease-in-out infinite;
+    opacity: 0.4;
+    color: var(--accent-color);
 }
 
-/* Floating sketch elements */
 .sketch-element {
-    pointer-events: none;
-    opacity: 0;
-    z-index: 3;
     position: absolute;
     color: var(--doodle-color);
-    font-size: 18px;
-}
-
-.sketch-element:before {
-    content: "";
-    background: linear-gradient(90deg, transparent, rgba(26, 26, 26, 0.1), transparent);
-    width: 50px;
-    height: 1px;
-    position: absolute;
-    top: 0;
-    right: 0;
-}
-
-/* Constellation lines for sketch connections */
-.constellation {
+    opacity: 0;
     pointer-events: none;
+    font-size: 20px;
+    user-select: none;
     z-index: 2;
-    position: absolute;
 }
 
-.constellation-line {
-    transform-origin: 0;
-    background-color: rgba(26, 26, 26, 0.2);
-    height: 1px;
-    position: absolute;
-}
-
-.constellation-star {
-    background-color: var(--doodle-color);
-    border-radius: 50%;
-    width: 3px;
-    height: 3px;
-    position: absolute;
-    opacity: 0.4;
-}
-
-/* Keep all media queries the same for responsiveness */
-@media (max-width: 768px) and (orientation: landscape) {
+/* ===== MOBILE OPTIMIZATIONS ===== */
+@media (max-width: 480px) {
     .body-styles {
-        padding: 16px 20px;
-    }
-    .container {
         padding: 20px 16px;
     }
+    
+    .logo {
+        width: 60px;
+    }
+    
+    .container {
+        border-radius: 8px;
+        padding: 24px 16px;
+    }
+    
     .terminal-line {
-        margin-bottom: 8px;
+        margin-bottom: 10px;
+        font-size: 14px;
+    }
+    
+    .form-group {
+        flex-direction: column;
+        gap: 12px;
+    }
+    
+    .email-input {
+        width: 100%;
+        min-width: unset;
+    }
+    
+    .submit-button {
+        justify-self: stretch;
+        width: 100%;
+    }
+    
+    .form-title {
+        margin-bottom: 16px;
         font-size: 12px;
+    }
+}
+
+@media (max-width: 768px) and (orientation: landscape) {
+    .body-styles {
+        padding: 10px 16px;
+    }
+    
+    .container {
+        padding: 16px;
+    }
+    
+    .terminal-line {
+        margin-bottom: 6px;
+        font-size: 13px;
         line-height: 1.4;
     }
 }
 
 @media (max-width: 320px) {
-    .body-styles,
-    .container {
-        padding: 16px 12px;
-    }
     .logo {
         width: 50px;
     }
-    .tap-me-hint {
-        font-size: 9px;
-        gap: 2px;
-    }
-    .tap-me-hint .arrow {
-        font-size: 10px;
-    }
+    
     .terminal-line {
-        font-size: 12px;
-        line-height: 1.3;
+        margin-bottom: 8px;
+        font-size: 13px;
+        line-height: 1.5;
     }
+    
     .caret {
-        margin-right: 6px;
+        margin-right: 4px;
     }
 }
 
 @media (min-width: 769px) and (max-width: 1024px) {
     .container {
-        padding: 32px 28px;
+        max-width: 600px;
     }
+    
     .logo {
-        width: 90px;
+        width: 100px;
     }
+    
     .terminal-line {
         font-size: 15px;
+        line-height: 1.6;
     }
 }
 
 @media (hover: none) and (pointer: coarse) {
     .submit-button:hover {
-        box-shadow: none;
         transform: none;
+        box-shadow: none;
     }
+    
     .submit-button:active {
-        transition: transform 0.1s;
         transform: scale(0.98);
     }
+    
     .email-input {
-        font-size: 16px;
-    }
-    .logo-container:hover .tap-me-hint {
-        opacity: 0.6;
-        transform: none;
-    }
-    .logo-container:hover .tap-me-hint .arrow {
-        transform: none;
-    }
-}
-
-@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
-    .doodle.large,
-    .doodle.bright {
-        filter: drop-shadow(0 0 2px rgba(26, 26, 26, 0.2));
+        font-size: 16px; /* Prevent zoom on iOS */
     }
 }
 
 @media (prefers-reduced-motion: reduce) {
     .terminal-line,
-    .signup-form {
-        transition: none;
-        transform: none;
-    }
     .logo,
-    .submit-button {
+    .submit-button,
+    .email-input {
         transition: none;
-    }
-    .cursor,
-    .logo.holographic,
-    .doodle {
         animation: none;
     }
-    .tap-me-hint {
+    
+    .cursor {
         animation: none;
+        opacity: 1;
     }
 }
 
