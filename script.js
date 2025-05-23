@@ -1,44 +1,172 @@
+// ===== CONFIGURATION =====
+const CONFIG = {
+    doodles: {
+        count: 250,
+        symbols: [
+            '○', '◇', '◯', '△', '▽', '◻', '◊', '♡', '☆', '★',
+            '→', '←', '↑', '↓', '↗', '↘', '↙', '↖', '⟲', '⟳',
+            '~', '≈', '∼', '〜', '⌢', '⌣', '⩙', '⩚', '∿', '≋',
+            '✓', '✗', '!', '?', '&', '@', '#', '%', '$', '+',
+            '※', '✧', '✦', '✶', '✸', '❀', '❁', '❃', '❅', '❆'
+        ],
+        sizeDistribution: {
+            tiny: 0.4,
+            small: 0.7,
+            medium: 0.9,
+            large: 0.98
+        },
+        animations: {
+            floatChance: 0.6,
+            wiggleChance: 0.8,
+            floatDuration: { min: 4, max: 8 },
+            wiggleDuration: { min: 3, max: 6 },
+            maxDelay: 5
+        }
+    },
+    typewriter: {
+        defaultSpeed: 33,
+        speedVariation: 20,
+        lineDelay: 133,
+        formDelay: 500
+    },
+    animations: {
+        logoEntrance: 1000,
+        lineSlide: 400,
+        formSlide: 800,
+        caretSlide: 300,
+        cursorFade: 200
+    },
+    logo: {
+        colors: ['cyan', 'purple', 'orange', 'green', 'red', 'yellow', 'white', 'black'],
+        cycleInterval: 3000,
+        transitions: {
+            fadeOut: 300,
+            fadeIn: 500
+        }
+    },
+    mouse: {
+        trailChance: 0.97,
+        trailSymbols: ['·', '°'],
+        trailDuration: 1500
+    },
+    floatingSketch: {
+        elements: ['⟶', '⤴', '⤵', '↝', '↜', '⇝', '⇜', '⟿', '⤷', '⤶'],
+        spawnInterval: 2000,
+        spawnChance: 0.5,
+        distance: { min: 150, max: 300 },
+        duration: { min: 2000, max: 4000 },
+        angleRange: { min: -30, max: 30 }
+    }
+};
+
+// ===== UTILITY FUNCTIONS =====
+/**
+ * Creates and configures a DOM element
+ * @param {string} tag - HTML tag name
+ * @param {string} className - CSS class name
+ * @param {string} textContent - Text content
+ * @param {Object} styles - Inline styles object
+ * @returns {HTMLElement} Configured element
+ */
+function createElement(tag, className = '', textContent = '', styles = {}) {
+    const element = document.createElement(tag);
+    if (className) element.className = className;
+    if (textContent) element.textContent = textContent;
+    
+    Object.assign(element.style, styles);
+    return element;
+}
+
+/**
+ * Safe element selection with error handling
+ * @param {string} selector - CSS selector
+ * @param {string} context - Context for error message
+ * @returns {HTMLElement|null} Selected element or null
+ */
+function safeSelect(selector, context = 'Element') {
+    try {
+        const element = document.querySelector(selector);
+        if (!element) {
+            console.warn(`${context} not found: ${selector}`);
+        }
+        return element;
+    } catch (error) {
+        console.error(`Error selecting ${context}:`, error);
+        return null;
+    }
+}
+
+/**
+ * Safe anime.js animation with error handling
+ * @param {Object} config - Animation configuration
+ * @param {string} context - Context for error message
+ */
+function safeAnimate(config, context = 'Animation') {
+    try {
+        return anime(config);
+    } catch (error) {
+        console.error(`${context} failed:`, error);
+        return null;
+    }
+}
+
+/**
+ * Generates a random number within a range
+ * @param {number} min - Minimum value
+ * @param {number} max - Maximum value
+ * @returns {number} Random number
+ */
+function randomRange(min, max) {
+    return Math.random() * (max - min) + min;
+}
+
+/**
+ * Sleep utility for async functions
+ * @param {number} ms - Milliseconds to sleep
+ * @returns {Promise} Sleep promise
+ */
+function sleep(ms) {
+    return new Promise(resolve => setTimeout(resolve, ms));
+}
+
 // ===== SKETCH PAD DOODLES =====
 function createSketchPad() {
     const container = document.body;
-    
-    // Array of simple doodles using text/symbols that look hand-drawn
-    const doodles = [
-        '○', '◇', '◯', '△', '▽', '◻', '◊', '♡', '☆', '★',
-        '→', '←', '↑', '↓', '↗', '↘', '↙', '↖', '⟲', '⟳',
-        '~', '≈', '∼', '〜', '⌢', '⌣', '⩙', '⩚', '∿', '≋',
-        '✓', '✗', '!', '?', '&', '@', '#', '%', '$', '+',
-        '※', '✧', '✦', '✶', '✸', '❀', '❁', '❃', '❅', '❆'
-    ];
+    const { doodles: config } = CONFIG;
     
     // Create field of doodles with varying sizes and opacity
-    for (let i = 0; i < 250; i++) {
+    for (let i = 0; i < config.count; i++) {
         const doodle = document.createElement('div');
         doodle.className = 'doodle';
-        doodle.textContent = doodles[Math.floor(Math.random() * doodles.length)];
+        doodle.textContent = config.symbols[Math.floor(Math.random() * config.symbols.length)];
         
         const rand = Math.random();
+        const { sizeDistribution } = config;
         
-        if (rand < 0.4) doodle.classList.add('tiny');
-        else if (rand < 0.7) doodle.classList.add('small');
-        else if (rand < 0.9) doodle.classList.add('medium');
-        else if (rand < 0.98) doodle.classList.add('large');
+        if (rand < sizeDistribution.tiny) doodle.classList.add('tiny');
+        else if (rand < sizeDistribution.small) doodle.classList.add('small');
+        else if (rand < sizeDistribution.medium) doodle.classList.add('medium');
+        else if (rand < sizeDistribution.large) doodle.classList.add('large');
         else doodle.classList.add('bright');
         
         doodle.style.left = Math.random() * 100 + '%';
         doodle.style.top = Math.random() * 100 + '%';
         container.appendChild(doodle);
         
+        const { animations } = config;
+        
         // Some doodles gently float
-        if (Math.random() > 0.6) {
-            doodle.style.animation = `float ${anime.random(4, 8)}s ease-in-out infinite`;
-            doodle.style.animationDelay = `${Math.random() * 5}s`;
+        if (Math.random() > animations.floatChance) {
+            const { floatDuration } = animations;
+            doodle.style.animation = `float ${anime.random(floatDuration.min, floatDuration.max)}s ease-in-out infinite`;
+            doodle.style.animationDelay = `${Math.random() * animations.maxDelay}s`;
         }
         
         // Some doodles wiggle slightly
-        if (Math.random() > 0.8) {
-            doodle.style.animation = `sketch-wiggle ${anime.random(3, 6)}s ease-in-out infinite`;
-            doodle.style.animationDelay = `${Math.random() * 3}s`;
+        if (Math.random() > animations.wiggleChance) {
+            const { wiggleDuration } = animations;
+            doodle.style.animation = `sketch-wiggle ${anime.random(wiggleDuration.min, wiggleDuration.max)}s ease-in-out infinite`;
+            doodle.style.animationDelay = `${Math.random() * animations.maxDelay}s`;
         }
     }
 }
@@ -104,9 +232,9 @@ document.addEventListener('mousemove', (e) => {
 });
 
 // ===== TYPEWRITER ANIMATION =====
-async function typeWriter(element, text, speed = 33) {
+async function typeWriter(element, text, speed = 33, keepCursor = false) {
     const textElement = element.querySelector('.text');
-    const cursor = element.querySelector('.cursor');
+    let cursor = element.querySelector('.cursor');
     const caret = element.querySelector('.caret');
     
     anime({
@@ -117,53 +245,62 @@ async function typeWriter(element, text, speed = 33) {
         easing: 'easeOutCubic'
     });
     
-    // If there's a cursor, position it at the beginning and make it visible
-    if (cursor) {
-        cursor.style.opacity = '1';
-        cursor.style.position = 'absolute';
+    // Create a cursor for this line if it doesn't exist
+    if (!cursor) {
+        cursor = document.createElement('span');
+        cursor.className = 'cursor';
+        element.appendChild(cursor);
     }
+    
+    // Position cursor at the beginning and make it visible
+    cursor.style.opacity = '1';
+    cursor.style.position = 'absolute';
+    cursor.style.left = caret.offsetWidth + 'px';
+    cursor.style.top = '0px';
     
     for (let i = 0; i < text.length; i++) {
         textElement.textContent += text[i];
         
-        // Move cursor to the right position after each character
-        if (cursor) {
-            // Get the caret width
-            const caretWidth = caret.offsetWidth;
+        // Use Range API to get the actual position of the text cursor
+        // This handles text wrapping automatically
+        if (textElement.textContent.length > 0) {
+            const range = document.createRange();
+            range.setStart(textElement.firstChild || textElement, textElement.textContent.length);
+            range.setEnd(textElement.firstChild || textElement, textElement.textContent.length);
             
-            // Create a temporary span to measure text width
-            const tempSpan = document.createElement('span');
-            tempSpan.style.visibility = 'hidden';
-            tempSpan.style.position = 'absolute';
-            tempSpan.style.whiteSpace = 'pre';
-            tempSpan.style.font = getComputedStyle(textElement).font;
-            tempSpan.textContent = textElement.textContent;
-            document.body.appendChild(tempSpan);
+            const rect = range.getBoundingClientRect();
+            const elementRect = element.getBoundingClientRect();
+            const caretRect = caret.getBoundingClientRect();
             
-            const textWidth = tempSpan.offsetWidth;
-            document.body.removeChild(tempSpan);
+            // Calculate position relative to the terminal line
+            const left = rect.left - elementRect.left;
+            const top = rect.top - elementRect.top;
             
-            // Position cursor after the caret and current text
-            cursor.style.left = (caretWidth + textWidth) + 'px';
+            cursor.style.left = left + 'px';
+            cursor.style.top = top + 'px';
+        } else {
+            // Fallback for empty text - position after caret
+            cursor.style.left = caret.offsetWidth + 'px';
             cursor.style.top = '0px';
         }
         
         await sleep(speed + Math.random() * 20);
     }
     
-    if (cursor) {
+    // Remove cursor when done typing this line (unless keepCursor is true)
+    if (!keepCursor) {
         anime({
             targets: cursor,
             opacity: 0,
             duration: 200,
             easing: 'easeOutCubic',
-            complete: () => cursor.remove()
+            complete: () => {
+                if (cursor && cursor.parentNode) {
+                    cursor.remove();
+                }
+            }
         });
     }
-}
-
-function sleep(ms) {
-    return new Promise(resolve => setTimeout(resolve, ms));
 }
 
 async function animateTerminal() {
@@ -183,13 +320,9 @@ async function animateTerminal() {
             easing: 'easeOutCubic'
         });
         
-        await typeWriter(line, text);
-        
-        if (i < lines.length - 1) {
-            const nextLine = lines[i + 1];
-            const nextText = nextLine.querySelector('.text');
-            nextText.innerHTML += '<span class="cursor"></span>';
-        }
+        // Keep cursor only on the last line
+        const isLastLine = i === lines.length - 1;
+        await typeWriter(line, text, 33, isLastLine);
         
         await sleep(133);
     }

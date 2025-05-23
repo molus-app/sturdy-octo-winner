@@ -186,7 +186,7 @@
     animation: blink 1s infinite;
     display: inline-block;
     position: absolute;
-    top: 0;
+    top: 0px;
     z-index: 1;
 }
 
