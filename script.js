@@ -307,7 +307,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }, 2000);
 });
 
-// Simple logo color cycling functionality
+// Enhanced logo color cycling functionality with auto-cycling
 function initializeColorCyclingLogo() {
     const logo = document.getElementById('molusLogo');
     const allColors = [
@@ -316,6 +316,7 @@ function initializeColorCyclingLogo() {
     ];
     let currentColorIndex = 0;
     let isAnimating = false;
+    let autoInterval;
     
     // Function to get appropriate colors for current mode
     function getAvailableColors() {
@@ -329,13 +330,6 @@ function initializeColorCyclingLogo() {
         }
     }
     
-    // Add click/touch event to the logo
-    logo.addEventListener('click', () => cycleColor());
-    logo.addEventListener('touchstart', (e) => {
-        e.preventDefault();
-        cycleColor();
-    });
-    
     function cycleColor() {
         if (isAnimating) return;
         isAnimating = true;
@@ -343,44 +337,88 @@ function initializeColorCyclingLogo() {
         // Get colors appropriate for current mode
         const availableColors = getAvailableColors();
         
-        // Add bouncing animation
-        logo.classList.add('bouncing');
-        
         // Cycle to next color
         currentColorIndex = (currentColorIndex + 1) % availableColors.length;
         const newColor = availableColors[currentColorIndex];
         
-        // Change the logo source with a smooth transition
-        setTimeout(() => {
-            logo.style.opacity = '0.7';
-            logo.src = `logo-${newColor}.svg`;
-            
-            // Fade back in
-            setTimeout(() => {
-                logo.style.opacity = '1';
-            }, 100);
-        }, 200);
-        
-        // Remove bouncing class and reset animation flag
-        setTimeout(() => {
-            logo.classList.remove('bouncing');
-            isAnimating = false;
-        }, 600);
+        // Smooth transition animation using anime.js
+        anime({
+            targets: logo,
+            opacity: [1, 0.3],
+            scale: [1, 0.95],
+            rotate: [0, 3],
+            duration: 300,
+            easing: 'easeInOutQuad',
+            complete: () => {
+                // Change the logo source
+                logo.src = `logo-${newColor}.svg`;
+                
+                // Animate back in with a slight bounce
+                anime({
+                    targets: logo,
+                    opacity: [0.3, 1],
+                    scale: [0.95, 1.05, 1],
+                    rotate: [3, -1, 0],
+                    duration: 500,
+                    easing: 'easeOutElastic(1, 0.5)',
+                    complete: () => {
+                        isAnimating = false;
+                    }
+                });
+            }
+        });
     }
+    
+    // Start auto-cycling every 3 seconds
+    function startAutoCycling() {
+        autoInterval = setInterval(() => {
+            cycleColor();
+        }, 3000);
+    }
+    
+    // Stop auto-cycling (e.g., when user interacts)
+    function stopAutoCycling() {
+        if (autoInterval) {
+            clearInterval(autoInterval);
+            autoInterval = null;
+        }
+    }
+    
+    // Restart auto-cycling after a delay
+    function restartAutoCycling() {
+        stopAutoCycling();
+        setTimeout(() => {
+            startAutoCycling();
+        }, 5000); // Wait 5 seconds after user interaction before resuming auto-cycle
+    }
+    
+    // Add click/touch event to the logo (manual override)
+    logo.addEventListener('click', () => {
+        stopAutoCycling();
+        cycleColor();
+        restartAutoCycling();
+    });
+    
+    logo.addEventListener('touchstart', (e) => {
+        e.preventDefault();
+        stopAutoCycling();
+        cycleColor();
+        restartAutoCycling();
+    });
     
     // Reset color index when color scheme changes
     window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', () => {
         currentColorIndex = 0; // Reset to start of new filtered array
     });
     
-    // Add subtle hover effect with anime.js
+    // Enhanced hover effect with anime.js
     logo.addEventListener('mouseenter', () => {
         if (!isAnimating) {
             anime({
                 targets: logo,
-                scale: 1.05,
-                rotate: '2deg',
-                duration: 200,
+                scale: 1.08,
+                rotate: '1deg',
+                duration: 300,
                 easing: 'easeOutCubic'
             });
         }
@@ -392,9 +430,14 @@ function initializeColorCyclingLogo() {
                 targets: logo,
                 scale: 1,
                 rotate: '0deg',
-                duration: 200,
+                duration: 300,
                 easing: 'easeOutCubic'
             });
         }
     });
+    
+    // Start the auto-cycling after a short delay
+    setTimeout(() => {
+        startAutoCycling();
+    }, 2000); // Wait 2 seconds after page load before starting auto-cycle
 } 
