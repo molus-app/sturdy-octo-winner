@@ -14,7 +14,7 @@
     --bg-gradient-2: #000814;
     --bg-rgb: 0, 8, 20;
     --text-color: #ffffff;
-    --accent-color: #ffd60a;
+    --accent-color: #c0c0c0;
     --input-bg: #1a1a1a;
     --input-bg-rgb: 26, 26, 26;
     --input-border: rgba(255, 255, 255, 0.2);
@@ -22,7 +22,7 @@
     --button-text: #000814;
     --cursor-color: #ffffff;
     --star-color: #ffffff;
-    --glow-color: rgba(255, 214, 10, 0.4);
+    --glow-color: rgba(192, 192, 192, 0.4);
 }
 
 @media (prefers-color-scheme: light) {
@@ -32,7 +32,7 @@
         --bg-gradient-2: #000d1a;
         --bg-rgb: 0, 13, 26;
         --text-color: #ffffff;
-        --accent-color: #ffd60a;
+        --accent-color: #c0c0c0;
         --input-bg: rgba(255, 255, 255, 0.1);
         --input-bg-rgb: 255, 255, 255;
         --input-border: rgba(255, 255, 255, 0.3);
@@ -40,7 +40,7 @@
         --button-text: #000814;
         --cursor-color: #ffffff;
         --star-color: #ffffff;
-        --glow-color: rgba(255, 214, 10, 0.5);
+        --glow-color: rgba(192, 192, 192, 0.5);
     }
 }
 
@@ -84,15 +84,15 @@
     width: 100%;
     position: relative;
     z-index: 10;
-    background: rgba(var(--bg-rgb), 0.6);
-    backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
+    background: rgba(var(--bg-rgb), 0.85);
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
     padding: clamp(20px, 6vw, 40px);
     border-radius: 12px;
     box-shadow: 
         0 0 50px rgba(255, 255, 255, 0.02),
         inset 0 0 30px rgba(255, 255, 255, 0.01);
-    border: 1px solid rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.08);
 }
 
 /* Logo section */
@@ -203,7 +203,7 @@
 .email-input:focus {
     outline: none;
     border-color: var(--accent-color);
-    box-shadow: 0 0 20px rgba(255, 214, 10, 0.2);
+    box-shadow: 0 0 20px rgba(192, 192, 192, 0.3);
 }
 
 .email-input::placeholder {

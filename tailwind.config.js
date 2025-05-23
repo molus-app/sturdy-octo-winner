@@ -9,7 +9,7 @@ module.exports = {
       colors: {
         'space-blue': '#000814',
         'space-blue-light': '#001d3d',
-        'accent-yellow': '#ffd60a',
+        'accent-silver': '#c0c0c0',
         'text-white': '#ffffff',
       },
       fontFamily: {
