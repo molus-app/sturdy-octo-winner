@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>molus - builders collective</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="milky-way"></div>
+    <div class="aurora"></div>
+    
+    <div class="content-wrapper">
+        <div class="container">
+            <div class="logo-container">
+                <svg class="logo" viewBox="0 0 108.89 73.35" xmlns="http://www.w3.org/2000/svg">
+                    <polygon fill="#90caf9" points="108.89 10.48 108.89 52.39 72.59 73.35 72.59 52.39 54.44 62.87 36.29 52.39 36.29 73.35 0 52.39 0 10.48 18.15 20.96 18.15 0 54.44 20.96 90.74 0 90.74 20.96 108.89 10.48"/>
+                </svg>
+            </div>
+            
+            <div class="terminal-content" id="terminal">
+                <div class="terminal-line" data-text="hi hi.">
+                    <span class="caret">></span><span class="text"></span><span class="cursor"></span>
+                </div>
+                <div class="terminal-line" data-text="molus is a non-profit builders collective.">
+                    <span class="caret">></span><span class="text"></span>
+                </div>
+                <div class="terminal-line" data-text="we run experiments that test the limits of software and ai.">
+                    <span class="caret">></span><span class="text"></span>
+                </div>
+                <div class="terminal-line" data-text="everything we build is free and open source.">
+                    <span class="caret">></span><span class="text"></span>
+                </div>
+                <div class="terminal-line" data-text="enjoy.">
+                    <span class="caret">></span><span class="text"></span>
+                </div>
+            </div>
+
+            <div class="signup-form" id="signupForm">
+                <div class="form-title">stay in the loop about what molus is building</div>
+                <form 
+                    action="https://buttondown.com/api/emails/embed-subscribe/suibhne?tag=molus-landing-page"
+                    method="post"
+                    class="embeddable-buttondown-form"
+                    onsubmit="handleSubmit(event)"
+                >
+                    <div class="form-group">
+                        <input 
+                            type="email" 
+                            name="email"
+                            class="email-input" 
+                            placeholder="your@email.com" 
+                            required
+                            aria-label="Email address"
+                        >
+                        <input type="hidden" value="1" name="embed" />
+                        <button type="submit" class="submit-button">subscribe</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js"></script>
+    <script src="script.js"></script>
+</body>
+</html> 
