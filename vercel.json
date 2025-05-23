@@ -1,5 +1,4 @@
 {
-  "buildCommand": "npm run build-css-prod",
   "outputDirectory": "./",
   "framework": null,
   "rewrites": [
