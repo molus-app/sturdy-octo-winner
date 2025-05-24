@@ -128,12 +128,32 @@
     transform: rotate(-0.5deg);
 }
 
+/* ===== HEADER & LOGO CONTAINER ===== */
+.header-logo-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start; /* Align items to the top */
+    margin-bottom: clamp(30px, 8vw, 40px);
+}
+
+.header-text {
+    /* Styles for the header text molus.app / worldwide web */
+    font-size: clamp(12px, 3vw, 14px);
+    line-height: 1.6;
+    color: var(--text-color);
+    opacity: 0.7;
+}
+
+.header-text p {
+    margin: 0;
+}
+
 /* ===== LOGO ===== */
 .logo-container {
     display: flex;
     align-items: center;
-    justify-content: flex-start;
-    margin-bottom: clamp(30px, 8vw, 40px);
+    /* justify-content: flex-start; */ /* Removed to allow top-right alignment via parent */
+    /* margin-bottom: clamp(30px, 8vw, 40px); */ /* Moved to parent .header-logo-container */
     opacity: 0;
     transform: translateY(-20px);
 }
